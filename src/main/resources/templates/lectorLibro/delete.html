@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Lector-Libro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Eliminar Lector-Libro</h1>
+    <hr />
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div class="container">
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">ID</dt>
+            <dd class="col-sm-10" th:text="${lectorLibro.id}"></dd>
+
+            <dt class="col-sm-2">Lector</dt>
+            <dd class="col-sm-10" th:text="${lectorLibro.lector.nombre} + ' ' + ${lectorLibro.lector.apellido}"></dd>
+
+            <dt class="col-sm-2">Libro</dt>
+            <dd class="col-sm-10" th:text="${lectorLibro.libro.titulo}"></dd>
+
+            <dt class="col-sm-2">Día de Préstamo</dt>
+            <dd class="col-sm-10" th:text="${lectorLibro.diaPrestamo}"></dd>
+
+            <dt class="col-sm-2">Día de Devolución</dt>
+            <dd class="col-sm-10" th:text="${lectorLibro.diaDevolucion}"></dd>
+        </dl>
+        <form th:action="@{/lectorLibros/delete}" method="post">
+            <input type="hidden" name="id" th:value="${lectorLibro.id}">
+            <input type="submit" value="Eliminar" class="btn btn-danger">
+            <a th:href="@{/lectorLibros}" class="btn btn-secondary">Regresar</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

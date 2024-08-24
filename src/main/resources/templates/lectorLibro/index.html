@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de LectorLibros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .highlight {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404;
+        }
+        .table-header {
+            background-color: #ffffff;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:if="${msg != null}">
+        <script th:inline="javascript">
+            Swal.fire({
+                title: "Confirmación",
+                text: [[${msg}]],
+                icon: "success"
+            });
+        </script>
+    </div>
+    <div th:if="${error != null}">
+        <script th:inline="javascript">
+            Swal.fire({
+                title: "Error",
+                text: [[${error}]],
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h1>Listado de LectorLibros</h1>
+    <a th:href="@{/lectorLibros/create}" class="btn btn-outline-primary">Nuevo Lector-Libro</a>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-header">
+            <th>ID</th>
+            <th>Lector</th>
+            <th>Libro</th>
+            <th>Día de Préstamo</th>
+            <th>Día de Devolución</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${lectorLibros.content}" class="highlight">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.lector.nombre} + ' ' + ${item.lector.apellido}"></td>
+            <td th:text="${item.libro.nombre}"></td>
+            <td th:text="${item.diaPrestamo}"></td>
+            <td th:text="${item.diaDevolucion}"></td>
+            <td>
+                <a th:href="@{/lectorLibros/details/{id}(id=${item.id})}" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/lectorLibros/edit/{id}(id=${item.id})}" class="btn btn-outline-info">Editar</a>
+                <a th:href="@{/lectorLibros/remove/{id}(id=${item.id})}" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav class="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                <a class="page-link" th:href="@{|/lectorLibros?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
+
+

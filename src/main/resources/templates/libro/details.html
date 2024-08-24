@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Libro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Detalles del Libro</h1>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">ID</dt>
+            <dd class="col-sm-10" th:text="${libro.id}"></dd>
+
+            <dt class="col-sm-2">Nombre</dt>
+            <dd class="col-sm-10" th:text="${libro.nombre}"></dd>
+
+            <dt class="col-sm-2">Autor</dt>
+            <dd class="col-sm-10" th:text="${libro.autor}"></dd>
+
+            <dt class="col-sm-2">Editorial</dt>
+            <dd class="col-sm-10" th:text="${libro.editorial}"></dd>
+
+            <dt class="col-sm-2">Año Publicado</dt>
+            <dd class="col-sm-10" th:text="${libro.anioPublicado}"></dd>
+        </dl>
+
+        <a th:href="@{/Libros/edit/{id} (id = ${libro.id})}" class="btn btn-outline-info">Editar</a>
+        <a th:href="@{/Libros}" class="btn btn-outline-secondary">Regresar</a>
+    </div>
+</div>
+</body>
+</html>

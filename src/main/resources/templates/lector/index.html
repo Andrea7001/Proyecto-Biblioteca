@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Lectores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .highlight {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .table-header {
+            background-color: #ffffff;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:if="${msg != null}">
+        <script th:inline="javascript">
+            Swal.fire({
+                title: "Confirmación",
+                text: [[${msg}]],
+                icon: "success"
+            });
+        </script>
+    </div>
+    <div th:if="${error != null}">
+        <script th:inline="javascript">
+            Swal.fire({
+                title: "Error",
+                text: [[${error}]],
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h1>Listado de Lectores</h1>
+    <a th:href="@{/Lectores/create}" class="btn btn-outline-primary">Nuevo lector</a>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-header">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${lectores.content}" class="highlight">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.nombre}"></td>
+            <td th:text="${item.apellido}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.telefono}"></td>
+            <td>
+                <a th:href="@{/Lectores/details/{id}(id=${item.id})}" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/Lectores/edit/{id}(id=${item.id})}" class="btn btn-outline-info">Editar</a>
+                <a th:href="@{/Lectores/remove/{id}(id=${item.id})}" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav class="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                <a class="page-link" th:href="@{|/Lectores?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
+

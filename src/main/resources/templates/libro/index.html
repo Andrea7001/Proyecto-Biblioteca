@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Libros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .highlight {
+            background-color: #fff3e0;
+            border-color: #ffebcc;
+            color: #856404;
+        }
+        .table-header {
+            background-color: #ffffff;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:if="${msg != null}">
+        <script th:inline="javascript">
+            Swal.fire({
+                title: "Confirmación",
+                text: [[${msg}]],
+                icon: "success"
+            });
+        </script>
+    </div>
+    <div th:if="${error != null}">
+        <script th:inline="javascript">
+            Swal.fire({
+                title: "Error",
+                text: [[${error}]],
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h1>Listado de Libros</h1>
+    <a th:href="@{/Libros/create}" class="btn btn-outline-primary">Nuevo libro</a>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-header">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>Año Publicado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${libros.content}" class="highlight">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.nombre}"></td>
+            <td th:text="${item.autor}"></td>
+            <td th:text="${item.editorial}"></td>
+            <td th:text="${item.anioPublicado}"></td>
+            <td>
+                <a th:href="@{/Libros/details/{id}(id=${item.id})}" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/Libros/edit/{id}(id=${item.id})}" class="btn btn-outline-info">Editar</a>
+                <a th:href="@{/Libros/remove/{id}(id=${item.id})}" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav class="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                <a class="page-link" th:href="@{|/Libros?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

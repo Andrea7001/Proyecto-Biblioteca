@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Lector</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Eliminar Lector</h1>
+    <hr />
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div class="container">
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">ID</dt>
+            <dd class="col-sm-10" th:text="${lector.id}"></dd>
+
+            <dt class="col-sm-2">Nombre</dt>
+            <dd class="col-sm-10" th:text="${lector.nombre}"></dd>
+
+            <dt class="col-sm-2">Apellido</dt>
+            <dd class="col-sm-10" th:text="${lector.apellido}"></dd>
+
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10" th:text="${lector.email}"></dd>
+
+            <dt class="col-sm-2">Teléfono</dt>
+            <dd class="col-sm-10" th:text="${lector.telefono}"></dd>
+        </dl>
+        <form th:action="@{/Lectores/delete}" method="post">
+            <input type="hidden" name="id" th:value="${lector.id}">
+            <input type="submit" value="Eliminar" class="btn btn-danger"> |
+            <a th:href="@{/Lectores}" class="btn btn-secondary">Regresar</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

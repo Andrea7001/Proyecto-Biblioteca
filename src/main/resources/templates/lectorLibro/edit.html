@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Lector-Libro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Editar Lector-Libro</h1>
+    <div>
+        <form th:action="@{/lectorLibros/update}" th:object="${lectorLibro}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lector" class="form-label">Lector</label>
+                        <select class="form-control" name="lectorId" id="lector" required>
+                            <option th:each="lector : ${lectores}" th:value="${lector.id}"
+                                    th:text="${lector.nombre} + ' ' + ${lector.apellido}"
+                                    th:selected="${lector.id == lectorLibro.lector.id}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="libro" class="form-label">Libro</label>
+                        <select class="form-control" name="libroId" id="libro" required>
+                            <option th:each="libro : ${libros}" th:value="${libro.id}"
+                                    th:text="${libro.nombre}"
+                                    th:selected="${libro.id == lectorLibro.libro.id}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="diaPrestamo" class="form-label">Día de Préstamo</label>
+                        <input type="date" class="form-control" th:field="*{diaPrestamo}" id="diaPrestamo" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="diaDevolucion" class="form-label">Día de Devolución</label>
+                        <input type="date" class="form-control" th:field="*{diaDevolucion}" id="diaDevolucion" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start" style="gap: 2rem;">
+                <button type="submit" class="btn btn-primary">Guardar</button> |
+                <a th:href="@{/lectorLibros}" class="btn btn-secondary">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
