@@ -79,7 +79,7 @@ public class LectorLibroController {
             lectorLibro.setDiaPrestamo(LocalDate.parse(diaPrestamo));
             lectorLibro.setDiaDevolucion(LocalDate.parse(diaDevolucion));
             lectorLibroServices.crearOeditar(lectorLibro);
-            attributes.addFlashAttribute("msg", "Lector libro creado.");
+            attributes.addFlashAttribute("msg", " Prestamo creado.");
         } else {
             attributes.addFlashAttribute("msg", "Lector o Libro no encontrado.");
         }

@@ -2,12 +2,12 @@
 <html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Lector-Libro</title>
+    <title>Editar  Prestamo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
-    <h1>Editar Lector-Libro</h1>
+    <h1>Editar Prestamo</h1>
     <div>
         <form th:action="@{/lectorLibros/update}" th:object="${lectorLibro}" method="post">
             <input type="hidden" th:field="*{id}" />
